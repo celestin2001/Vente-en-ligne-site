@@ -1,0 +1,104 @@
+{% include "gestionproduits/header.html" %}
+{% load static %}
+<script src="{% static "account/js/dist/cleave.min.js" %}"></script>
+<script src="{% static "account/js/cleave-phone.gn.js" %}"></script>
+
+           
+    </header>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+  
+    <!-- End Top Search -->
+
+    <!-- Start Slider -->
+    {% if errors %}
+     <h1 class="mt-5 ml-3" style="color: red;">{{errors}}</h1>
+    {% endif %}
+   
+          <div class="container mt-3 mb-5" id="parent">
+            <div class="row">
+                <div class="col-lg-7 col-sm-12">
+                    <form action="" class="" method="post"> 
+                        {% csrf_token %}
+                       <legend>veuillez-vous connecté</legend>
+                        <div class="row">
+                            <div class="co-md-12 col-sm-12 ">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="username" placeholder="username" required>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="co-md-12 col-sm-12 ">
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="password" placeholder="password "required>
+                                </div>
+                            </div>
+                            <div class="co-md-12 col-sm-12 ">
+                                
+                    
+                               <center>
+                                <button class="btn btn-primary" type="submit">soumettre</button>
+                               </center>
+                            </div>
+                       
+                           
+                        </div>
+                    </form>
+                    <div class="co-md-12 col-sm-12 ">
+                        <p style="color: black;">pas de compte? <a style="color: blue;" href="{% url "signup" %}">rejoignez-nous</a></p>
+                    </div>
+                    <div class="co-md-12 col-sm-12 ">
+                        {% if user.is_authenticated %}
+                        <a href="{% url "change_password" %}">modifie mot de passe?</a>
+                        {% endif %}
+                        <a href="{% url "reset_password" %}">mot de passe oublfa-inverse ?</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-sm-12 mt-5">
+                    <div>
+                        <h3> <em>Prête à transformer votre façon de magasiner? Inscrivez-vous sur CelestinhoShop pour acceder
+                            à des offres spéciales,des nouveautés tendance et une expérience de shopping personnalisée.Rejoignez la communauté dès aujourd'hui pour faire des achats!!!
+                        </em> 
+                           
+                        </h3>
+                    </div>
+                    <div>
+                        <img src="{% static "account/images/signup.jpg" %}" alt="">
+                    </div>
+                    
+                    
+                </div>
+            </div>
+          </div>
+      
+    </center>
+    </div>
+    </div>
+    <!-- End Blog  -->
+
+
+    <!-- Start Instagram Feed  -->
+ 
+    <!-- End Instagram Feed  -->
+
+
+    {% include "gestionproduits/footer.html" %}
+    <!-- ALL JS FILES -->
+   <script>
+      const telephone=document.getElementById('phone')
+      const traite=new Cleave(telephone,{
+        phone:true,
+        phoneRegionCode:'GN'
+      });
+      console.log(traite);
+   </script>
+   
+
+<script src="{% static "account/js/dist/cleave.min.js" %}"></script>
+    <script src="{% static "account/js/cleave-phone.gn.js" %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+{% include "gestionproduits/header.html" %}
+{% load static %}
+<script src="{% static "account/js/dist/cleave.min.js" %}"></script>
+<script src="{% static "account/js/cleave-phone.gn.js" %}"></script>
+
+           
+    </header>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+  
+    <!-- End Top Search -->
+
+    <!-- Start Slider -->
+    {% if errors %}
+     <h1 class="mt-5 ml-3" style="color: red;">{{errors}}</h1>
+    {% endif %}
+   
+          <div class="container mt-3 mb-5" id="parent">
+            <div class="row">
+                <div class="col-lg-7 col-sm-12">
+                    <form action="" class="" method="post" enctype="multipart/form-data"> 
+                        {% csrf_token %}
+                       <legend>Inscrivez-vous via ce formulaire</legend>
+                        <div class="row">
+                            <div class="co-md-12 col-sm-12 ">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="username" placeholder="username" required data-error="entrez votre nom s'il vous plait">
+                                </div>
+                            </div>
+                            <div class="co-md-12 col-sm-12 ">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="lastname" placeholder="Nom" required>
+                                </div>
+                            </div>
+                            <div class="co-md-12 col-sm-12 ">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" name="firstname" placeholder="prenom" required>
+                                </div>
+                            </div>
+                            <div class="co-md-12 col-sm-12 ">
+                                <div class="form-group">
+                                    <input class="form-control" type="email" name="email" placeholder="entrez votre email" required>
+                                </div>
+                            </div>
+                            <div class="co-md-12 col-sm-12 ">
+                                <div class="form-group">
+                                    <input class="form-control" type="number" id="phone" name="phone" placeholder="telephone" required>
+                                </div>
+                            </div>
+                            <div class="co-md-12 col-sm-12 ">
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="password" placeholder="password "required>
+                                </div>
+                            </div>
+                            <div class="co-md-12 col-sm-12 ">
+                                <div class="form-group">
+                                    <input class="form-control" type="password" name="password2" placeholder="confirme" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Profil:  </label>
+                                    <input  type="file" placeholder="choisir un profil" name="image" required>
+                                </div>
+                               <center>
+                                <button class="btn btn-primary" type="submit">soumettre</button>
+                               </center>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-5 col-sm-12 mt-5">
+                    <div>
+                        <h3> <em>Prête à transformer votre façon de magasiner? Inscrivez-vous sur CelestinhoShop pour acceder
+                            à des offres spéciales,des nouveautés tendance et une expérience de shopping personnalisée.Rejoignez la communauté dès aujourd'hui pour faire des achats!!!
+                        </em> 
+                           
+                        </h3>
+                    </div>
+                    <div>
+                        <img src="{% static "account/images/signup.jpg" %}" alt="">
+                    </div>
+                    
+                    
+                </div>
+            </div>
+          </div>
+      
+    </center>
+    </div>
+    </div>
+    <!-- End Blog  -->
+
+
+    <!-- Start Instagram Feed  -->
+ 
+    <!-- End Instagram Feed  -->
+
+
+    {% include "gestionproduits/footer.html" %}
+    <!-- ALL JS FILES -->
+   <script>
+      const telephone=document.getElementById('phone')
+      const traite=new Cleave(telephone,{
+        phone:true,
+        phoneRegionCode:'GN'
+      });
+      console.log(traite);
+   </script>
+   
+
+<script src="{% static "account/js/dist/cleave.min.js" %}"></script>
+    <script src="{% static "account/js/cleave-phone.gn.js" %}"></script>
+
+</body>
+
+</html>

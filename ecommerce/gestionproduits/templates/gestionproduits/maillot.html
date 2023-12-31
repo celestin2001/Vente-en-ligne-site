@@ -1,0 +1,57 @@
+{% include "gestionproduits/header.html" %}
+<!-- Start Side Menu -->
+
+
+<!-- End Side Menu -->
+</nav>
+<!-- End Navigation -->
+</header>
+<!-- End Main Top -->
+
+<div class="container-fluid mt-3">
+    <div class="row">
+        {% for Produits in maillot  %}
+        <div class="col-lg-4 mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3>{{Produits.nom_produit}}</h3>
+                </div>
+                <img src="{{Produits.image.url}}" alt="">
+                <div class="card_body">
+                    <center>
+                        <p class="card_text" style="font-weight: 600;">Prix {{Produits.prix}}GNF</p>
+                    </center>
+                  
+                 <center>
+                    <div class="btn btn-group">
+                        {% if  user_authenticated %}
+                        <a class="btn btn-outline-primary" href="{% url 'add-to-card' Produits.id %}">ajouter</a>
+                        {% else %}
+                        <a class="btn btn-outline-primary" href="{% url "connexion" %}">ajouter</a>
+                        {% endif %}
+                        <a class="btn btn-outline-success" href="detail/{{Produits.id}}">voir plus</a>
+                      </div>
+                 </center>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+  </div>
+
+
+
+<!-- End Cart -->
+
+<!-- Start Instagram Feed  -->
+
+<!-- End Instagram Feed  -->
+
+
+<!-- Start Footer  -->
+{% include "gestionproduits/footer.html" %}
+</body>
+
+</html>

@@ -1,0 +1,103 @@
+     {% load static %}
+     {% include "gestionproduits/header.html" %}
+            <!-- Start Side Menu -->
+           
+           
+            <!-- End Side Menu -->
+        </nav>
+        <!-- End Navigation -->
+    </header>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+   
+    <!-- End Top Search -->
+
+    <!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Contact Us</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active"> Contact Us </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+    <!-- Start Contact Us  -->
+    <div class="container mt-3 mb-5" id="parent">
+        <div class="row">
+            <div class="col-lg-7 col-sm-12">
+                <form action="" class="" method="post" enctype="multipart/form-data"> 
+                    {% csrf_token %}
+                   <legend>remplire ce formulaire</legend>
+                    <div class="row">
+                        <div class="co-md-12 col-sm-12 ">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="nom" placeholder="Votre nom" required data-error="entrez votre nom s'il vous plait">
+                            </div>
+                        </div>
+                      
+                       
+                        <div class="co-md-12 col-sm-12 ">
+                            <div class="form-group">
+                                <input class="form-control" type="email" name="email" placeholder="entrez votre email" required>
+                            </div>
+                        </div>
+                       
+                        <div class="co-md-12 col-sm-12 ">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="suject" placeholder="sujet "required>
+                            </div>
+                        </div>
+                        <div class="co-md-12 col-sm-12 ">
+                            <div class="form-group">
+                                <textarea class="form-control" id="message" name="message" placeholder="Your Message" rows="4"  required></textarea>
+                                
+                            </div>
+                           
+                           <center>
+                            <button class="btn btn-primary" type="submit">soumettre</button>
+                           </center>
+                        </div>
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-5 col-sm-12 mt-5">
+                <div>
+                    <h3> <em>Prête à transformer votre façon de magasiner? Inscrivez-vous sur CelestinhoShop pour acceder
+                        à des offres spéciales,des nouveautés tendance et une expérience de shopping personnalisée.Rejoignez la communauté dès aujourd'hui pour faire des achats!!!
+                    </em> 
+                       
+                    </h3>
+                </div>
+                <div>
+                    <img src="{% static "account/images/signup.jpg" %}" alt="">
+                </div>
+                
+                
+            </div>
+        </div>
+      </div>
+   
+    <!-- End Cart -->
+
+    <!-- Start Instagram Feed  -->
+   
+    <!-- End Instagram Feed  -->
+
+
+    <!-- Start Footer  -->
+    {% include "gestionproduits/footer.html" %}
+</body>
+
+</html>
+
+
+
