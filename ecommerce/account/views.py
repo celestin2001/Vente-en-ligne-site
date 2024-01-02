@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from.models import Utilisateur
+from gestionproduits.models import Card,Order
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -7,6 +8,7 @@ import random as rd
 
 def connexion(request):
     errors=''
+    
     if request.method=='POST':
         username=request.POST['username']
         password=request.POST['password']

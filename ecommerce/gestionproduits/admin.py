@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Categorie,Produits,Card,CartItem,Contact
+from .models import Categorie,Produits,Card,Order,Contact
 
 
 class liste(admin.ModelAdmin):
@@ -17,7 +17,7 @@ admin.site.register(Produits,liste)
 admin.site.register(Categorie)
 # admin.site.register(Order)
 admin.site.register(Card)
-admin.site.register(CartItem)
+admin.site.register(Order)
 admin.site.register(Contact)
 
     

@@ -1,25 +1,30 @@
 
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from gestionproduits.models import Card
+from gestionproduits.models import Card,Produits
 
 
 
-def cart_view(request):
-    products=''
+def card(request):
+    nb=''
+    order=''
     cart=''
+    
     if request.user.is_authenticated:
-        cart = Card.objects.get(user=request.user)
-        product_count=cart.produit.count
-        products = cart.produit.all()
+          
+          cart , created=Card.objects.get_or_create(user=request.user)
+          order=cart.orders.all()
+          nb=cart.orders.count()
         
     else:
-       product_count=0
-
+        nb=0
+   
+    
     context={
-       'products': products,
-       'product_count': product_count,
-       'cart':cart
-    }
+        'order': order,
+        'nb': nb,
+        'cart':cart,
+        
+     }
 
     return context

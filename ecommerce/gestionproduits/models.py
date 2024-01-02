@@ -27,44 +27,44 @@ class Produits(models.Model):
     # def get_absolute_url(self):
     #     return reverse("detail", kwargs={"slug": self.slug})
 
-# class Order(models.Model):
-#     user=models.ForeignKey(AUTH_USER_MODEL,on_delete=models.CASCADE)
-#     produit=models.ForeignKey(Produits,on_delete=models.CASCADE)
-#     quantity=models.IntegerField(default=1)
-#     ordered=models.BooleanField(default=False)
-#     order_date=models.DateTimeField(blank=True,null=True)
+class Order(models.Model):
+     user=models.ForeignKey(AUTH_USER_MODEL,on_delete=models.CASCADE)
+     produit=models.ForeignKey(Produits,on_delete=models.CASCADE)
+     quantity=models.IntegerField(default=1)
+     ordered=models.BooleanField(default=False)
+     order_date=models.DateTimeField(blank=True,null=True)
 
-#     def __str__(self):
-#         return self.produit.nom_produit
+     def __str__(self):
+         return self.produit.nom_produit
     
-
-# class Cart(models.Model):
-#     user=models.OneToOneField(AUTH_USER_MODEL,on_delete=models.CASCADE)
-#     orders=models.ManyToManyField(Order)
-   
-#     def __str__(self):
-#         return  self.user.username
-    
-#     def delete(self,*args, **kwargs):
-#         for order in self.orders.all():
-#             order.ordered=True
-#             order.order_date=timezone.now()
-#             order.save()
-
-#         self.orders.clear()
-#         super(Cart, self).delete(*args, **kwargs)
 
 class Card(models.Model):
-    user=models.ForeignKey(AUTH_USER_MODEL,on_delete=models.CASCADE)
-    produit = models.ManyToManyField(Produits,through=CartItem)
+     user=models.OneToOneField(AUTH_USER_MODEL,on_delete=models.CASCADE)
+     orders=models.ManyToManyField(Order)
+   
+     def __str__(self):
+         return  self.user.username
+    
+     def delete(self,*args, **kwargs):
+         for order in self.orders.all():
+             order.ordered=True
+             order.order_date=timezone.now()
+             order.save()
 
-    def __str__(self):
-        return self.user.username
+         self.orders.clear()
+         super(Card, self).delete(*args, **kwargs)
 
-class CartItem(models.Model):
-    cart = models.ForeignKey(Card, on_delete=models.CASCADE)
-    product = models.ForeignKey(Produits, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField()
+# class Card(models.Model):
+#     user=models.ForeignKey(AUTH_USER_MODEL,on_delete=models.CASCADE)
+#     produit = models.ManyToManyField(Produits)
+
+#     def __str__(self):
+#         return self.user.username
+
+# class CartItem(models.Model):
+#     cart = models.ForeignKey(Card, on_delete=models.CASCADE)
+#     product = models.ForeignKey(Produits, on_delete=models.CASCADE)
+#     quantity = models.PositiveIntegerField()
 
 class Contact(models.Model):
     nom=models.CharField(max_length=30)

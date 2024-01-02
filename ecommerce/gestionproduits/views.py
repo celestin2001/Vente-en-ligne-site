@@ -1,7 +1,7 @@
 # importation des modules et package
 from django.shortcuts import redirect, render,get_object_or_404
 from django.urls import reverse
-from .models import Produits,Categorie,Card,Contact,CartItem
+from .models import Produits,Categorie,Card,Contact,Order
 from django.contrib.auth.decorators import login_required
 
 # Vue pour la page d'aceuille
@@ -94,32 +94,66 @@ def seach(request):
     return render (request,'gestionproduits/searche.html')
 
 # Vue pour ajout d'un produit au panier
-# def add_to_card(request,my):
-#      user=request.user
-#      produit=get_object_or_404(Produits,id=my)
-#      card, _=Cart.objects.get_or_create(user=user)
-#      order , created=Order.objects.get_or_create(user=user,ordered=False,produit=produit)
-#      if created:
-#          card.orders.add(order)
-#          card.save()
-#      else:
-#          order.quantity +=1
-#          order.save()
+def add_to_card(request,my):
+      user=request.user
+      produit=get_object_or_404(Produits,id=my)
+      card, _=Card.objects.get_or_create(user=user)
+      order , created=Order.objects.get_or_create(user=user,ordered=False,produit=produit)
+   
+      if created:
+          card.orders.add(order)
+          card.save()
+      else:
+          order.quantity +=1
+          order.save()
 
-#      return redirect(reverse("home"))
+      return redirect('home')
 
-# def card(request):
-#     card=get_object_or_404(Cart,user=request.user)
-#     nb=card.orders.count
+def card(request):
+    # user = request.user
+    # cart= get_object_or_404(Card,user=user)
+    # order=cart.orders.all()
+    # nb=cart.orders.count()
 
-#     return render(request,'gestionproduits/cart.html',{"order":card.orders.all(),"nb":nb})
+    return render(request,'gestionproduits/cart.html')
 
-# def supprime_panier(request):
-#     user=request.user
-#     card=get_object_or_404(Cart,user=user)
-#     if card:
-#         card.delete()
+
+# def add_to_cart(request, my):
+#     user = request.user
+#     product = Produits.objects.get(id=my)
+
+#     order, created = Order.objects.get_or_create(
+#         user=user, product=product
+#     )
+
+#     if created:
+#         order.quantity = 1
+#     else:
+#         order.quantity += 1
+
+#     order.save()
+
 #     return redirect('home')
+
+
+
+def supprime_panier(request):
+     user=request.user
+     card=get_object_or_404(Card,user=user)
+     if card:
+         card.delete()
+     return redirect('card')
+
+def supprime_produit(request, produc_id):
+    user=request.user
+    produit=get_object_or_404(Produits,id=produc_id)
+    cart=Order.objects.get(user=user,produit=produit)
+    cart.delete()
+
+
+
+
+    return redirect('card')
 
 # # def supprime_produit(request,my):
 # #     produit=get_object_or_404(Produits,id=my)
@@ -130,17 +164,17 @@ def seach(request):
 
 #     return render(request,'gestionproduits/cart.html',{"order":card.orders.all(),"nb":nb})
 
-@login_required
-def add_to_cart_view(request, my):
-    product = Produits.objects.get(id=my)
-    cart, created = Card.objects.get_or_create(user=request.user)
-    cart.produit.add(product)
-    cart.save()
+# @login_required
+# def add_to_cart_view(request, my):
+#     product = Produits.objects.get(id=my)
+#     cart, created = Card.objects.get_or_create(user=request.user)
+#     cart.produit.add(product)
+#     cart.save()
 
-    return redirect('home')
+#     return redirect('home')
 
 
-def cart_view(request):
+# def cart_view(request):
     # cart = Card.objects.get(user=request.user)
     # if cart is None:
     #     return render(request, 'gestionproduits/no_cart.html')
@@ -154,35 +188,35 @@ def cart_view(request):
     #    'total':total
     # }
     
-    return render(request, 'gestionproduits/cart.html')
+    # return render(request, 'gestionproduits/cart.html')
 
-@login_required
-def supprime_produit(request, my):
-    product = Produits.objects.get(id=my)
-    cart = Card.objects.get(user=request.user)
+# @login_required
+# def supprime_produit(request, my):
+#     product = Produits.objects.get(id=my)
+#     cart = Card.objects.get(user=request.user)
     
-    cart.produit.remove(product)
-    cart.save()
-    return redirect('cart')
+#     cart.produit.remove(product)
+#     cart.save()
+#     return redirect('cart')
 
-@login_required
-def update_cart_view(request, my):
-    product = Produits.objects.get(id=my)
-    cart = Card.objects.get(user=request.user)
-    quantity = int(request.POST.get('quantity'))
+# @login_required
+# def update_cart_view(request, my):
+#     product = Produits.objects.get(id=my)
+#     cart = Card.objects.get(user=request.user)
+#     quantity = int(request.POST.get('quantity'))
 
-    if quantity > product.quantite:
-        quantity = product.quantite
+#     if quantity > product.quantite:
+#         quantity = product.quantite
 
-    cart.produit.update(quantite=quantity)
-    cart.save()
+#     cart.produit.update(quantite=quantity)
+#     cart.save()
 
-    return redirect('cart')
+#     return redirect('cart')
 
 
-def nocart(request):
+# def nocart(request):
 
-    return render(request,'gestionproduits/no_cart.html')
+#     return render(request,'gestionproduits/no_cart.html')
 
 
 

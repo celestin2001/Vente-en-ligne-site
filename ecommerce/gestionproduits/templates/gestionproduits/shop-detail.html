@@ -85,7 +85,7 @@
 							</li>
 						</ul>
                         {% if  user_authenticated %}
-                        <a class="btn btn-outline-primary" href="{% url 'add-to-card' produit.id %}">ajouter</a>
+                        <a class="btn btn-outline-primary" href="{% url 'add-to-card' Produits.id %}}">ajouter</a>
                         {% else %}
                         <a class="btn btn-outline-primary" href="{% url "connexion" %}">ajouter</a>
                         {% endif %}

@@ -39,7 +39,7 @@
 </head>
 
 <body>
-    <h1>{{nb}}</h1>
+    
     <!-- Start Main Top -->
     <div class="main-top">
         <div class="container-fluid">
@@ -167,7 +167,7 @@
                         <li class="side-menu">
 							<a href="#">
 								<i class="fa fa-shopping-bag"></i>
-								<span class="badge">{{product_count}}</span>
+								<span class="badge">{{nb}}</span>
 								<p>Mon panier</p>
 							</a>
 						</li>
@@ -181,29 +181,21 @@
                 <a href="#" class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
                     <ul class="cart-list">
+                        {% for ordere in order  %}
                         <li>
-                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
+                            <a href="#" class="photo"><img src="{{ordere.produit.image.url}}" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">{{ordere.produit.nom_produit}}</a></h6>
+                            <p> <span class="price">{{ordere.produit.prix}}GNF</span><span>****</span>QT:{{ordere.quantity}}</p>
                         </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        {% if user.cart  %}
+                        {% empty %}
+                        <p style="font-size: 16; color: blue;">vous n'avez rien pour l'instant dans votre panier</p>
+                        {% endfor %}
                         <li class="total">
-                            <a href="{% url "cart" %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                            <a href="{% url "card" %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
                             <span class="float-right"><strong>Total</strong>: $180.00</span>
                         </li>
-                        {% else %}
-                        <a href="{% url "nocart" %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                        {% endif %}
+                       
+                       
                     </ul>
                 </li>
             </div>
