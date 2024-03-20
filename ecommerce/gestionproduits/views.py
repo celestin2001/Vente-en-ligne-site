@@ -1,7 +1,11 @@
 # importation des modules et package
 from django.shortcuts import redirect, render,get_object_or_404
 from django.urls import reverse
+<<<<<<< HEAD
 from .models import Produits,Categorie,Card,Contact,Order,Commande
+=======
+from .models import Produits,Categorie,Card,Contact,Order
+>>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
@@ -147,7 +151,11 @@ def card(request):
 #     return redirect('home')
 
 
+<<<<<<< HEAD
 #vue pour supprimer le panier
+=======
+
+>>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
 def supprime_panier(request):
      user=request.user
      card=get_object_or_404(Card,user=user)
@@ -155,6 +163,7 @@ def supprime_panier(request):
          card.delete()
      return redirect('card')
 
+<<<<<<< HEAD
 # def supprime_produit(request, produc_id):
 #     """Supprime un produit du panier de l'utilisateur ou décrémente la quantité."""
 
@@ -252,6 +261,21 @@ def historique(request):
 
     
 
+=======
+def supprime_produit(request, produc_id):
+    user=request.user
+    produit=get_object_or_404(Produits,id=produc_id)
+    cart=Order.objects.get(user=user,produit=produit)
+    cart.delete()
+
+
+
+
+    return redirect('card')
+
+# # def supprime_produit(request,my):
+# #     produit=get_object_or_404(Produits,id=my)
+>>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
 
 # def header(request):
 #     card=get_object_or_404(Cart,user=request.user)

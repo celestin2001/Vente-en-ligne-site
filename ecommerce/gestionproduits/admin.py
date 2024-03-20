@@ -1,5 +1,9 @@
 from django.contrib import admin
+<<<<<<< HEAD
 from .models import Categorie,Produits,Card,Order,Contact,Commande
+=======
+from .models import Categorie,Produits,Card,Order,Contact
+>>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
 
 
 class liste(admin.ModelAdmin):

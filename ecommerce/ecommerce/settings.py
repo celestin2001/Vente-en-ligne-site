@@ -91,8 +91,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+<<<<<<< HEAD
                  'gestionproduits.context_processor.card',
                  'app_admin.context_processor.space_admin',
+=======
+                 'gestionproduits.context_processor.card'
+>>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
             ],
         },
     },

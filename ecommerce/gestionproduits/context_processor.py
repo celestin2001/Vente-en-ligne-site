@@ -1,8 +1,12 @@
 
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
+<<<<<<< HEAD
 from gestionproduits.models import Card,Produits,Order,Categorie,Commande
 from django.db.models.aggregates import Sum
+=======
+from gestionproduits.models import Card,Produits
+>>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
 
 
 
@@ -10,6 +14,7 @@ def card(request):
     nb=''
     order=''
     cart=''
+<<<<<<< HEAD
     total_pricese=0
     prices = {}
     total_price=0
@@ -65,12 +70,24 @@ def card(request):
     
     
     
+=======
+    
+    if request.user.is_authenticated:
+          
+          cart , created=Card.objects.get_or_create(user=request.user)
+          order=cart.orders.all()
+          nb=cart.orders.count()
+        
+    else:
+        nb=0
+>>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
    
     
     context={
         'order': order,
         'nb': nb,
         'cart':cart,
+<<<<<<< HEAD
         'prices':prices,
         'total_price':total_price,
         'total_pricese':total_pricese,
@@ -78,6 +95,9 @@ def card(request):
         'categorie':categorie,
         'commande':commande,
         'existe':existe
+=======
+        
+>>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
      }
 
     return context 
