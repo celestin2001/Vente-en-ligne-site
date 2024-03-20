@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Categorie,Produits,Card,CartItem,Contact
+from .models import Categorie,Produits,Card,Order,Contact,Commande
 
 
 class liste(admin.ModelAdmin):
@@ -13,12 +13,20 @@ class liste(admin.ModelAdmin):
             return '{}...'.format(text)
         else: return text
 
+class liste2(admin.ModelAdmin):
+    list_display=('username','phone')
+
+
+class liste3(admin.ModelAdmin):
+    list_display=('user','total','date_commande')
+
 admin.site.register(Produits,liste)
 admin.site.register(Categorie)
 # admin.site.register(Order)
 admin.site.register(Card)
-admin.site.register(CartItem)
+admin.site.register(Order)
 admin.site.register(Contact)
+admin.site.register(Commande,liste3)
 
     
 

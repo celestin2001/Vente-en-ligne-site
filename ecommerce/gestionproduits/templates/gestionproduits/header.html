@@ -39,37 +39,33 @@
 </head>
 
 <body>
-    <h1>{{nb}}</h1>
+    
     <!-- Start Main Top -->
     <div class="main-top">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="custom-select-box">
-                        <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-							<option>¥ JPY</option>
-							<option>$ USD</option>
-							<option>€ EUR</option>
-                            
-						</select>
-                    </div>
+					
                     <div class="right-phone-box">
                         <p>Appellez nous sur :- <a href="#"> +224 625 505 969</a></p>
                     </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user s_color"></i>voir mon profil</a></li>
-                            <li><a href="{% url "apropos" %}"><i class="fas fa-location-arrow"></i> nos location</a></li>
-                            <li><a href="#"><i class="fas fa-headset"></i> Contactez nous</a></li>
+                            {% if user.is_authenticated %}
+                            <li><a href="{% url "profil" %}"><i class="fa fa-user s_color"></i>modifier mon profil</a></li>
+                            <li><a href="{% url "historique" %}"></i>Historique</a></li>
+                            {% endif %}
+                            {% comment %} <li><a href="{% url "apropos" %}"><i class="fas fa-location-arrow"></i> nos location</a></li> {% endcomment %}
+                            
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<div class="login-box">
 						{% if user.is_authenticated %}
-                        {% if user.image %}
+                            {% if user.image %}
                             <img src="{{user.image.url}}" alt="" style="width: 50px; height: 30px; border-radius: 50%;">
-                        {% endif %}
+                            {% endif %}
                         
                         {% endif %}
 					</div>
@@ -131,9 +127,11 @@
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">categorie</a>
                             <ul class="dropdown-menu">
-								<li><a href="{% url "maillot" %}">maillot</a></li>
-								<li><a href="shop-detail.html">chaussures</a></li>
-                                <li><a href="{% url "huile" %}">Huiles</a></li>
+                                {% for categories in categorie  %}
+								<li><a href="{% url 'categorie' categories.id %}" style="color: white; font-family: 'Times New Roman', Times, serif;">{{categories.nom_categorie}}</a></li>
+                                {% endfor %}
+								{% comment %} <li><a href="shop-detail.html">chaussures</a></li> {% endcomment %}
+                                {% comment %} <li><a href="{% url "huile" %}">Huiles</a></li> {% endcomment %}
                                 
                             </ul>
                         </li>
@@ -167,7 +165,7 @@
                         <li class="side-menu">
 							<a href="#">
 								<i class="fa fa-shopping-bag"></i>
-								<span class="badge">{{product_count}}</span>
+								<span class="badge">{{nb}}</span>
 								<p>Mon panier</p>
 							</a>
 						</li>
@@ -181,29 +179,21 @@
                 <a href="#" class="close-side"><i class="fa fa-times"></i></a>
                 <li class="cart-box">
                     <ul class="cart-list">
+                        {% for ordere in order  %}
                         <li>
-                            <a href="#" class="photo"><img src="images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
+                            <a href="#" class="photo"><img src="{{ordere.produit.image.url}}" class="cart-thumb" alt="" /></a>
+                            <h6><a href="#">{{ordere.produit.nom_produit}}</a></h6>
+                            <p> <span class="price">{{ordere.produit.prix}}GNF</span><span>****</span>QT:{{ordere.quantity}}</p>
                         </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        {% if user.cart  %}
+                        {% empty %}
+                        <p style="font-size: 16; color: blue;">vous n'avez rien pour l'instant dans votre panier</p>
+                        {% endfor %}
                         <li class="total">
-                            <a href="{% url "cart" %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
+                            <a href="{% url "card" %}" class="btn btn-default hvr-hover btn-cart">Voir panier</a>
+                            <span class="float-right"><strong>Total</strong>:{{total_price}}GNF</span>
                         </li>
-                        {% else %}
-                        <a href="{% url "nocart" %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                        {% endif %}
+                       
+                       
                     </ul>
                 </li>
             </div>

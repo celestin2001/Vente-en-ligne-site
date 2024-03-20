@@ -33,13 +33,34 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'gestionproduits',
-    'account',
+    'Compte',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'django_htmx',
+    'app_admin',
+    
 ]
+
+AUTHENTICATION_BACKENDS = [
+    
+   
+    'django.contrib.auth.backends.ModelBackend',
+
+ # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+ROOT_URLCONF = 'ecommerce.urls'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,7 +70,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_htmx.middleware.HtmxMiddleware",
 ]
+WSGI_APPLICATION = 'reseau_sociaux.wsgi.application'
 
 ROOT_URLCONF = 'ecommerce.urls'
 
@@ -68,7 +91,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                 'gestionproduits.context_processor.cart_view'
+                 'gestionproduits.context_processor.card',
+                 'app_admin.context_processor.space_admin',
             ],
         },
     },
@@ -76,7 +100,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
-AUTH_USER_MODEL='account.Utilisateur'
+AUTH_USER_MODEL='Compte.Utilisateur'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -106,12 +130,40 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS=True
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_HOST_USER='jeremiesandouno123@gmail.com'
-EMAIS_HOST_PASSWORD='Celestin2023'
-EMAIL_PORT=587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'jeremiesandouno123@gmail.com'
+EMAIL_HOST_PASSWORD = 'idwpftboferfwfbc'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+LOGIN_REDIRECT_URL='home'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'METHOD': 'oauth2',  # Set to 'js_sdk' to use the Facebook connect SDK
+        # 'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        # 'LOCALE_FUNC': 'path.to.callable',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v13.0',
+        'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
+    }
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -136,3 +188,5 @@ MEDIA_ROOT='media'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+

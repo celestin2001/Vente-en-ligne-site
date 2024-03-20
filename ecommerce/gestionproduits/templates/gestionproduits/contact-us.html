@@ -1,4 +1,5 @@
      {% load static %}
+     {% load django_htmx %}
      {% include "gestionproduits/header.html" %}
             <!-- Start Side Menu -->
            
@@ -18,10 +19,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Contact Us</h2>
+                    <h2>Contactez</h2>
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active"> Contact Us </li>
+                        <li class="breadcrumb-item"><a href="#">acceuil</a></li>
+                        <li class="breadcrumb-item active"> Contactez nous </li>
                     </ul>
                 </div>
             </div>
@@ -33,36 +34,50 @@
     <div class="container mt-3 mb-5" id="parent">
         <div class="row">
             <div class="col-lg-7 col-sm-12">
-                <form action="" class="" method="post" enctype="multipart/form-data"> 
+                <form  action="" class="was-validated needs-validation" method="post" enctype="multipart/form-data"> 
                     {% csrf_token %}
                    <legend>remplire ce formulaire</legend>
                     <div class="row">
                         <div class="co-md-12 col-sm-12 ">
                             <div class="form-group">
                                 <input class="form-control" type="text" name="nom" placeholder="Votre nom" required data-error="entrez votre nom s'il vous plait">
+                                <div class="invalid-feedback">
+                                    veuillez entrez votre nom
+                                    </div>
                             </div>
+                           
                         </div>
                       
                        
                         <div class="co-md-12 col-sm-12 ">
                             <div class="form-group">
                                 <input class="form-control" type="email" name="email" placeholder="entrez votre email" required>
+                                <div class="invalid-feedback">
+                                    veuillez entrez votre email
+                                </div>
                             </div>
+                            
                         </div>
                        
                         <div class="co-md-12 col-sm-12 ">
                             <div class="form-group">
                                 <input class="form-control" type="text" name="suject" placeholder="sujet "required>
+                                <div class="invalid-feedback">
+                                    entrez le sujet s'il vous plait
+                                 </div>
                             </div>
+                         
                         </div>
                         <div class="co-md-12 col-sm-12 ">
                             <div class="form-group">
                                 <textarea class="form-control" id="message" name="message" placeholder="Your Message" rows="4"  required></textarea>
-                                
+                                <div class="invalid-feedback">
+                                    veuillez entrez le message s'il vous plait
+                                 </div>
                             </div>
                            
                            <center>
-                            <button class="btn btn-primary" type="submit">soumettre</button>
+                            <button hx-post="{% url 'contact' %}" class="btn btn-primary" type="submit">soumettre</button>
                            </center>
                         </div>
                         
@@ -85,7 +100,7 @@
             </div>
         </div>
       </div>
-   
+ 
     <!-- End Cart -->
 
     <!-- Start Instagram Feed  -->

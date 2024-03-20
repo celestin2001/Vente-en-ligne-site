@@ -76,19 +76,12 @@
 						<h4>Description du produit:</h4>
 						<p>{{produit.description}}
 							 </p>
-						<ul>
-							<li>
-								<div class="form-group quantity-box">
-									<label class="control-label">En stock </label>
-									<input class="form-control" value=""  type="number" placeholder="{{produit.quantite}}" readonly>
-								</div>
-							</li>
-						</ul>
-                        {% if  user_authenticated %}
-                        <a class="btn btn-outline-primary" href="{% url 'add-to-card' produit.id %}">ajouter</a>
-                        {% else %}
-                        <a class="btn btn-outline-primary" href="{% url "connexion" %}">ajouter</a>
-                        {% endif %}
+						
+                             {% if  user_authenticated %}
+                             <a class="btn btn-outline-primary" href="{% url 'add-to-card' produit.id %}">ajouter</a>
+                             {% else %}
+                             <a class="btn btn-outline-primary" href="{% url "connexion" %}">ajouter</a>
+                             {% endif %}
 						<div class="price-box-bar">
 							<div class="cart-and-bay-btn">
                              
