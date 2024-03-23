@@ -1,9 +1,9 @@
 from django.contrib import admin
-<<<<<<< HEAD
+
 from .models import Categorie,Produits,Card,Order,Contact,Commande
-=======
+
 from .models import Categorie,Produits,Card,Order,Contact
->>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
+
 
 
 class liste(admin.ModelAdmin):
@@ -31,6 +31,8 @@ admin.site.register(Card)
 admin.site.register(Order)
 admin.site.register(Contact)
 admin.site.register(Commande,liste3)
+admin.site.site_header='Site De Vente En Ligne'
+admin.site.index_title='ECOMMERCE'
 
     
 

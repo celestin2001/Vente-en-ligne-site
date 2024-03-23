@@ -74,7 +74,11 @@
                       <li><!-- start message -->
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{user.image.url}}" class="img-circle" alt="User Image"/>
+                            {% if user.image %}
+                            <img src="{{user.image.url}}" class="img-circle" alt="User Image" />
+                            {% else %}
+                            <img src="{% static 'app_admin/images/prog1.png' %}" class="img-circle" alt="User Image">
+                            {% endif %}
                           </div>
                           <h4>
                             Support Team
@@ -86,7 +90,11 @@
                       <li>
                         <a href="#">
                           <div class="pull-left">
-                            <img src="{{user.image.url}}" class="img-circle" alt="user image"/>
+                            {% if user.image %}
+                    <img src="{{user.image.url}}" class="img-circle" alt="User Image" />
+                    {% else %}
+                    <img src="{% static 'app_admin/images/prog1.png' %}" class="img-circle" alt="User Image">
+                    {% endif %}
                           </div>
                           <h4>
                             AdminLTE Design Team
@@ -251,13 +259,17 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{user.image.url}}" class="user-image" alt="User Image"/>
+                
                   <span class="hidden-xs">{{user.username}}</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
+                    {% if user.image %}
                     <img src="{{user.image.url}}" class="img-circle" alt="User Image" />
+                    {% else %}
+                    <img src="{% static 'app_admin/images/prog1.png' %}" class="img-circle" alt="User Image">
+                    {% endif %}
                     <p>
                       {{user.username}}
                       <small>Member depuis {{user.date_joined}}</small>
@@ -297,7 +309,11 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="{{user.image.url}}" class="img-circle" alt="User Image" />
+              {% if user.image %}
+                    <img src="{{user.image.url}}" class="img-circle" alt="User Image" />
+                    {% else %}
+                    <img src="{% static 'app_admin/images/prog1.png' %}" class="img-circle" alt="User Image">
+                    {% endif %}
             </div>
             <div class="pull-left info">
               <p>{{user.username}}</p>
@@ -323,8 +339,8 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                <li class="active"><a href="{% url 'space_admin' %}"><i class="fa fa-circle-o"></i> Tableau de bord v1</a></li>
+                <li><a href="{% url 'produit' %}"><i class="fa fa-circle-o"></i> Tableau de bord v2</a></li>
               </ul>
             </li>
            

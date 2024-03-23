@@ -8,13 +8,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-<<<<<<< HEAD
-                        <h2>panier</h2>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">shopping</a></li>
-                            <li class="breadcrumb-item active">panier</li>
-                        </ul>
-=======
                         <h2>Cart</h2>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#">Shop</a></li>
@@ -27,108 +20,7 @@
         <!-- End All Title Box -->
     
         <!-- Start Cart  -->
-        <div class="cart-box-main">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="table-main table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Images</th>
-                                        <th>Nom du produit</th>
-                                        <th>Prix</th>
-                                        <th>Quantite</th>
-                                        <th>Total</th>
-                                        <th>supprimer</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for ordere  in order  %}
-                                    <tr>
-                                        <td class="thumbnail-img">
-                                            <a href="#">
-                                        <img class="img-fluid" src="{{ordere.produit.image.url}}" alt="" />
-                                    </a>
-                                        </td>
-                                        <td class="">
-                                            <a href="#">
-                                                {{ordere.produit.nom_produit}}
-                                    </a>
-                                        </td>
-                                        <td class="">
-                                            <p>{{ordere.produit.prix}}</p>
-                                        </td>
-                                        <td class="quantity-box"><input type="number" size="4" value="{{ordere.quantity}}" min="0" step="1" class="c-input-text qty text"></td>
-                                        <td class="total-pr">
-                                            <p>$ 80.0</p>
-                                        </td>
-                                        <td class="remove-pr">
-                                            <a href="supprime_produit\{{ordere.produit.id}}">
-                                        <i class="fas fa-times"></i>
-                                    </a>
-                                        </td>
-                                    </tr>
-                                    {% empty %}
-                                    <h1 class="h2">Vous panier est vide pour l'instant</h1>
-                                    {% endfor %}
-                                   
-                                    {% comment %} <tr>
-                                        <td class="thumbnail-img">
-                                            <a href="#">
-                                        <img class="img-fluid" src="images/img-pro-02.jpg" alt="" />
-                                    </a>
-                                        </td>
-                                        <td class="name-pr">
-                                            <a href="#">
-                                        Lorem ipsum dolor sit amet
-                                    </a>
-                                        </td>
-                                        <td class="price-pr">
-                                            <p>$ 60.0</p>
-                                        </td>
-                                        <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                        <td class="total-pr">
-                                            <p>$ 80.0</p>
-                                        </td>
-                                        <td class="remove-pr">
-                                            <a href="#">
-                                        <i class="fas fa-times"></i>
-                                    </a>
-                                        </td>
-                                    </tr> {% endcomment %}
-                                    {% comment %} <tr>
-                                        <td class="thumbnail-img">
-                                            <a href="#">
-                                        <img class="img-fluid" src="images/img-pro-03.jpg" alt="" />
-                                    </a>
-                                        </td>
-                                        <td class="name-pr">
-                                            <a href="#">
-                                        Lorem ipsum dolor sit amet
-                                    </a>
-                                        </td>
-                                        <td class="price-pr">
-                                            <p>$ 30.0</p>
-                                        </td>
-                                        <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                        <td class="total-pr">
-                                            <p>$ 80.0</p>
-                                        </td>
-                                        <td class="remove-pr">
-                                            <a href="#">
-                                        <i class="fas fa-times"></i>
-                                    </a>
-                                        </td>
-                                    </tr> {% endcomment %}
-                                </tbody>
-                            </table>
-                        </div>
->>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
-                    </div>
-                </div>
-            </div>
-        </div>
+        iv>
         <!-- End All Title Box -->
     
         <!-- Start Cart  -->
@@ -165,9 +57,7 @@
                                             <p>{{ordere.produit.prix}}</p>
                                         </td>
                                         <td class="quantity-box"><input type="number" size="4" value="{{ordere.quantity}}" min="0" step="1" class="c-input-text qty text"></td>
-                                        {% comment %} <td class="total-pr">
-                                            <p>{{ ordere.total_prices }}  GNF</p>
-                                        </td> {% endcomment %}
+                                       
                                          <td class="remove-pr">
                                             <a href="{% url 'supprime_produit' ordere.produit.id %}">
                                         <i class="fas fa-times"></i>
@@ -181,54 +71,7 @@
                                    
                                     {% endfor %}
                                    
-                                    {% comment %} <tr>
-                                        <td class="thumbnail-img">
-                                            <a href="#">
-                                        <img class="img-fluid" src="images/img-pro-02.jpg" alt="" />
-                                    </a>
-                                        </td>
-                                        <td class="name-pr">
-                                            <a href="#">
-                                        Lorem ipsum dolor sit amet
-                                    </a>
-                                        </td>
-                                        <td class="price-pr">
-                                            <p>$ 60.0</p>
-                                        </td>
-                                        <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                        <td class="total-pr">
-                                            <p>$ 80.0</p>
-                                        </td>
-                                        <td class="remove-pr">
-                                            <a href="#">
-                                        <i class="fas fa-times"></i>
-                                    </a>
-                                        </td>
-                                    </tr> {% endcomment %}
-                                    {% comment %} <tr>
-                                        <td class="thumbnail-img">
-                                            <a href="#">
-                                        <img class="img-fluid" src="images/img-pro-03.jpg" alt="" />
-                                    </a>
-                                        </td>
-                                        <td class="name-pr">
-                                            <a href="#">
-                                        Lorem ipsum dolor sit amet
-                                    </a>
-                                        </td>
-                                        <td class="price-pr">
-                                            <p>$ 30.0</p>
-                                        </td>
-                                        <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1" class="c-input-text qty text"></td>
-                                        <td class="total-pr">
-                                            <p>$ 80.0</p>
-                                        </td>
-                                        <td class="remove-pr">
-                                            <a href="#">
-                                        <i class="fas fa-times"></i>
-                                    </a>
-                                        </td>
-                                    </tr> {% endcomment %}
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -247,10 +90,9 @@
                 
            
             
-<<<<<<< HEAD
                 <div class="form-group col-md-2">
                     <label for="inputPassword4" style="font-weight: 600;">Somme à payer</label>
-                    <input class="bg-dark" type="readonly" value="{{total_price}}"  id="total" placeholder="" name="total" style="color: white;">
+                    <input class="bg-dark" type="readonly" value="{{total_price}}GNF"  id="total" placeholder="" name="total" style="color: white;">
                   </div>
                    {% comment %} <form method="post" class="mt-3 mb-3">
                 <input  type="hidden" value="{{commande}}" id="item" name="orders">
@@ -274,12 +116,6 @@
             </center>
             
             
-=======
-            <a class="btn btn-primary m-3 p-3" href="{% url "supprime" %}">supprimer le panier</a>
-            {% for totale in total  %}
-            <p>{{totale}}</p>
-            {% endfor %}
->>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
                 {% comment %} <div class="row my-5">
                     <div class="col-lg-6 col-sm-6">
                         <div class="coupon-box">

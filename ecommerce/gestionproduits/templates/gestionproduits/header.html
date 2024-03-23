@@ -55,8 +55,7 @@
                             <li><a href="{% url "profil" %}"><i class="fa fa-user s_color"></i>modifier mon profil</a></li>
                             <li><a href="{% url "historique" %}"></i>Historique</a></li>
                             {% endif %}
-                            {% comment %} <li><a href="{% url "apropos" %}"><i class="fas fa-location-arrow"></i> nos location</a></li> {% endcomment %}
-                            
+                           
                         </ul>
                     </div>
                 </div>
@@ -65,6 +64,8 @@
 						{% if user.is_authenticated %}
                             {% if user.image %}
                             <img src="{{user.image.url}}" alt="" style="width: 50px; height: 30px; border-radius: 50%;">
+                            {% else %}
+                            <img src="{% static 'app_admin/images/prog1.png' %}" alt="" style="width: 50px; height: 30px; border-radius: 50%;">
                             {% endif %}
                         
                         {% endif %}
@@ -130,14 +131,13 @@
                                 {% for categories in categorie  %}
 								<li><a href="{% url 'categorie' categories.id %}" style="color: white; font-family: 'Times New Roman', Times, serif;">{{categories.nom_categorie}}</a></li>
                                 {% endfor %}
-								{% comment %} <li><a href="shop-detail.html">chaussures</a></li> {% endcomment %}
-                                {% comment %} <li><a href="{% url "huile" %}">Huiles</a></li> {% endcomment %}
+							
                                 
                             </ul>
                         </li>
 
 
-                        {% comment %}<li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>{% endcomment %}
+                      
                         
                         <li class="nav-item"><a class="nav-link" href="{% url "contact" %}">Contactez nous</a></li>
                            {% if user.is_authenticated  %}
@@ -188,14 +188,9 @@
                         {% empty %}
                         <p style="font-size: 16; color: blue;">vous n'avez rien pour l'instant dans votre panier</p>
                         {% endfor %}
-                        <li class="total">
-<<<<<<< HEAD
+                        <li class="total d-flex">
                             <a href="{% url "card" %}" class="btn btn-default hvr-hover btn-cart">Voir panier</a>
                             <span class="float-right"><strong>Total</strong>:{{total_price}}GNF</span>
-=======
-                            <a href="{% url "card" %}" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
->>>>>>> 491e159427bfe34e5cab555ac31faebd4d15c889
                         </li>
                        
                        

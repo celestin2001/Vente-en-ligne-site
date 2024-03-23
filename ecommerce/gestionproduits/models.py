@@ -19,9 +19,12 @@ class Produits(models.Model):
     prix=models.FloatField(default=0.0)
     description=models.TextField()
     quantite=models.IntegerField(null=True)
-    image=models.ImageField(upload_to='%y%m%d')
+    image=models.ImageField(upload_to='media/',blank=True,null=True)
     date=models.DateField(auto_now=True)
     categorie=models.ForeignKey(Categorie, on_delete=models.CASCADE)
+
+    class META:
+        ordoring=['-date']
 
     def __str__(self) -> str:
         return self.nom_produit
@@ -59,49 +62,11 @@ class Card(models.Model):
          self.orders.clear()
          super(Card, self).delete(*args, **kwargs)
 
-=======
+
     # def get_absolute_url(self):
     #     return reverse("detail", kwargs={"slug": self.slug})
 
-class Order(models.Model):
-     user=models.ForeignKey(AUTH_USER_MODEL,on_delete=models.CASCADE)
-     produit=models.ForeignKey(Produits,on_delete=models.CASCADE)
-     quantity=models.IntegerField(default=1)
-     ordered=models.BooleanField(default=False)
-     order_date=models.DateTimeField(blank=True,null=True)
 
-     def __str__(self):
-         return self.produit.nom_produit
-    
-
-class Card(models.Model):
-     user=models.OneToOneField(AUTH_USER_MODEL,on_delete=models.CASCADE)
-     orders=models.ManyToManyField(Order)
-   
-     def __str__(self):
-         return  self.user.username
-    
-     def delete(self,*args, **kwargs):
-         for order in self.orders.all():
-             order.ordered=True
-             order.order_date=timezone.now()
-             order.save()
-
-         self.orders.clear()
-         super(Card, self).delete(*args, **kwargs)
-
- 
-# class Card(models.Model):
-#     user=models.ForeignKey(AUTH_USER_MODEL,on_delete=models.CASCADE)
-#     produit = models.ManyToManyField(Produits)
-
-#     def __str__(self):
-#         return self.user.username
-
-# class CartItem(models.Model):
-#     cart = models.ForeignKey(Card, on_delete=models.CASCADE)
-#     product = models.ForeignKey(Produits, on_delete=models.CASCADE)
-#     quantity = models.PositiveIntegerField()
 
 class Contact(models.Model):
     nom=models.CharField(max_length=30)
@@ -126,10 +91,7 @@ class Commande(models.Model):
     def __str__(self):
         return self.user.username
     
-    # def delete(self,*args, **kwargs):
-    #     if len(self.orders) ==0:
-    #      self.orders.clear()
-    #      super(Commande, self).delete(*args, **kwargs)
+   
 
 
 

@@ -3,16 +3,14 @@ from gestionproduits.models import *
 from Compte.models import *
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from .form import Rowform,UserForm
 
 @login_required(login_url="connexion")
 def space_admin(request):
-    user = request.user
-    context = {
-        'user':user
-    }
+    
  
     
-    return render(request,'app_admin/index.html',context)
+    return render(request,'app_admin/index.html')
 
 def supprimer(request,my_id):
     user = Utilisateur.objects.get(id=my_id)
@@ -37,28 +35,61 @@ def searche(request):
 def produit(request):
     donnee = Produits.objects.all()
     all_categorie = Categorie.objects.all()
+    message = ''
+  
+    # if request.method == 'POST':
+    #     nom = request.POST.get('nom')
+    #     prix = request.POST.get('prix')
+    #     quantite = request.POST.get('quantite')
+    #     description = request.POST.get('description')
+    #     categorie = request.POST.get('categorie')
+    #     image = request.FILES.get('image')
+    #     new = Produits.objects.create(
+    #         nom_produit = nom,
+    #         prix = prix,
+    #         quantite = quantite,
+    #         description = description,
+    #         categorie = categorie,
+    #         image = image
+    #     )
+    #     new.save()
+    form = Rowform()
+    if request.method == 'POST':
+        form = Rowform(request.POST,request.FILES or None)
+        if form.is_valid():
+            form.save()
+            message = 'Ajout de produit effectué avec succès'
+            return render(request,'app_admin/produit.html',{'message':message})
     context = {
         'donnee':donnee,
-        'all_categorie':all_categorie
+        'all_categorie':all_categorie,
+        'form':form,
+        'message':message
     }
-    if request.method == 'POST':
-        nom = request.POST.get('nom')
-        prix = request.POST.get('prix')
-        quantite = request.POST.get('quantite')
-        description = request.POST.get('description')
-        categorie = request.POST.get('categorie')
-        image = request.FILES.get('image')
-        new = Produits.objects.create(
-            nom_produit = nom,
-            prix = prix,
-            quantite = quantite,
-            description = description,
-            categorie = categorie,
-            image = image
-        )
-        new.save()
+        
     return render(request,'app_admin/produit.html',context)
 
+def modifie_produit(request,obj):
+    message = ''
+    produit = Produits.objects.get(id=obj)
+    form = Rowform(request.POST or None,instance=produit)
+    if form.is_valid():
+        form.save()
+        form = Rowform()
+        message ="Modification effectuée avec succès"
+    return render(request,'app_admin/update.html',{"form":form})
+
+def modifie_user(request,obj):
+    message = ''
+    utilisateur = Utilisateur.objects.get(id=obj)
+    form = UserForm(request.POST or None, instance=utilisateur)
+    if form.is_valid():
+        form.save()
+        form = UserForm()
+        message = "Modification de l'utilisateur effectuée avec succès"
+        return render(request,'app_admin/index.html',{'message':message})
+    return render(request,'app_admin/update_user.html',{'form':form})
+        
 def supprimer_produit(request,my_id):
     user = Produits.objects.get(id=my_id)
     user.delete()
@@ -77,9 +108,10 @@ def connexion(request):
             return redirect('space_admin')
         else:
             errors="nom d'utilisateur ou mot de passe incorecte"
-            return render(request,'Compte/connexion.html',{'errors':errors})
+            return render(request,'app_admin/login.html',{'errors':errors})
     return render(request,'app_admin/login.html',{'errors':errors})
 
 def deconnexion(request):
     logout(request)
-    return redirect('connexion')
+    return redirect('connexion2')
+
